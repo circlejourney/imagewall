@@ -50,11 +50,6 @@
         }
         mkdir("www");
         recursive_copy("template", "www");
-        mkdir("www/assets");
-        recursive_copy(
-            "assets",
-            buildpath("www", "assets")
-        );
 
         echo "Project initialised! Files can be found in /www directory.";
     }
