@@ -2,8 +2,8 @@
 A PHP engine for creating masonry-style galleries of images. Detailed tag/extag system, options for infinite scroll and pagination modes, NSFW filters, and more. This is a hobby project and will continue to be developed! A live example can be seen at <a href="https://circlejourney.net/offshore/wall">Offshore image wall</a>.
 
 ## Prerequisites
-- Install [XAMPP from Apache Friends](https://www.apachefriends.org/) and add the `php` directory to your PATH variables, or install a different PHP server.
-- Install GD Graphics Library. In your local install of PHP, open php.ini and add the line:
+- Install [XAMPP from Apache Friends](https://www.apachefriends.org/) and add the **php** directory to your PATH variable.
+- Install GD Graphics Library. In your local install of PHP, open **php.ini** and add the line:
   > `extension=gd`
 
 ## Quick start
