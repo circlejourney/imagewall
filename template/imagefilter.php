@@ -13,12 +13,12 @@ $showNsfw = isset($_GET["nsfw"]) ? intval($_GET["nsfw"]) : 0;
     $tagroot = "tag-info/";
     $perPage = 30;
 
-    if(!file_exists("config/imagelist.json") || !file_exists("config/tags.json")) {
+    if(!file_exists("imagelist.json") || !file_exists("tags.json")) {
         $imagelist = array();
         $taginfo = array();
     } else {
-        $imagelist = json_decode( file_get_contents("config/imagelist.json"), true );
-        $taginfo = json_decode( file_get_contents("config/tags.json"), true );
+        $imagelist = json_decode( file_get_contents("imagelist.json"), true );
+        $taginfo = json_decode( file_get_contents("tags.json"), true );
     }
 
     // SORT
