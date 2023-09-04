@@ -314,29 +314,24 @@
 
                     <table class="tag-palette">
                         <tr>
-                            <?php
-                                
-                                foreach($tagcats as $k => $v) {
-                                    if(sizeof($v) > 0) {
-                                        echo "<th>".$k."</th>";
-                                    }
-                                }
-                            ?>
+                            <?php foreach($tagcats as $k => $v): ?>
+                                <?php if(sizeof($v) > 0): ?>
+                                    <th><?php echo $k; ?></th>
+                                <?php endif; ?>
+                            <?php endforeach ?>
                         </tr>
                         <tr>
-                            <?php
-                                foreach($tagcats as $k => $v) {
-                                    if(sizeof($v) > 0) {
-                                        echo "<td>";
-                                        foreach($v as $w) {
-                                            echo '<a href="#" onclick="event.preventDefault()" onmousedown=\'addTag()\'>';
-                                            echo $w;
-                                            echo "</a> ";
-                                        }
-                                        echo "</td>";
-                                    }
-                                }
-                            ?>
+                            <?php foreach($tagcats as $k => $v): ?>
+                                <?php if(sizeof($v) > 0): ?>
+                                    <td>
+                                        <?php foreach($v as $w): ?>
+                                            <a href="#" onclick="event.preventDefault()" onmousedown="addTag()">
+                                                <?php echo $w ?>
+                                            </a>
+                                        <?php endforeach ?>
+                                    </td>
+                                <?php endif ?>
+                            <?php endforeach ?>
                         </tr>
                     </table>
                 </div>
@@ -354,59 +349,54 @@
                 </div>
             </fieldset>
             
-            <?php
-
-                echo "<input type='hidden' id='update-only' name='updateOnly'>";
-
-                foreach($workingdata as $k => $v) {
-                    $newk = $editID === false ?  sizeof($data) - $k - 1 : $k;
-                    echo "<fieldset class='form-listing'>";
-
-                    $allSet = sizeof( array_diff( array("date", "desc", "title", "tags", "thumb"), array_keys($v) ) ) === 0;
-                    echo $allSet ? "<details open><summary>Done</summary>" : "";
-                    echo "<div class='details-inside'>";
+            <input type='hidden' id='update-only' name='updateOnly'>
+            
+            <?php foreach($workingdata as $k => $v): ?>
+                    <?php
+                        $newk = $editID === false ?  sizeof($data) - $k - 1 : $k;
+                        $allSet = sizeof( array_diff( array("date", "desc", "title", "tags", "thumb"), array_keys($v) ) ) === 0;
+                    ?>
                     
-                    echo "<div class='input-end-block'>";
-                    if( !file_exists("www/thumbs/" . $v["thumb"]) ) {
-                        echo "<span class='thumb'>Thumbnail file doesn't exist yet.</span>";
-                    } else {
-                        echo '<img class="thumb" src="www/thumbs/' . $v["thumb"] . '">';
-                    }
-                    echo "<span class='link'>";
-                    echo "<input type='file' name='file_". $newk ."'>";
-                    echo "<input type='submit' value='Upload' name='upload_" . $newk . "'>";
-                    echo "</span>";
+                    <fieldset class='form-listing'>
+                        <div class='details-inside'>
+                            <div class='input-end-block'>
+                            <?php if( !file_exists("www/thumbs/" . $v["thumb"]) ): ?>
+                                <span class='thumb'>Thumbnail file doesn't exist yet.</span>
+                            <?php else: ?>
+                                <img class="thumb" src="www/thumbs/<?php echo $v["thumb"]?>">
+                            <?php endif ?>
+                            
+                            <span class='link'>
+                                <input type='file' name='file_<?php echo $newk ?>'>
+                                <input type='submit' value='Upload' name='upload_<?php echo $newk ?>'>
+                            </span>
+                        </div>
 
-                    echo "</div>";
+                        <div class='input-block'>
+                            <input type='text' oninput='highlight(this)' placeholder='Date uploaded' name='date_<?php echo $newk ?>'
+                                <?php if(isset($v["date"])): ?>
+                                    value='<?php echo $v["date"];?>'
+                                <?php endif ?>
+                            >
 
-                    echo "<div class='input-block'>";
-                    echo "<input type='text' oninput='highlight(this)' placeholder='Date uploaded' name='date_" . $newk . "'";
-                    echo isset($v["date"]) ? " value='" . $v["date"] . "'" : "";
-                    echo "></input>";
+                            <input type='text' oninput='highlight(this)' placeholder='Title' name='title_<?php echo $newk?>'
+                                <?php if(isset($v["title"])): ?>
+                                    value='<?php echo filter_var( $v["title"], FILTER_SANITIZE_SPECIAL_CHARS )?>'
+                                <?php endif ?>
+                                >
 
-                    echo "<input type='text' oninput='highlight(this)' placeholder='Title' name='title_" . $newk . "'";
-                    echo isset($v["title"]) ? " value='" . filter_var( $v["title"], FILTER_SANITIZE_SPECIAL_CHARS ) . "'" : "";
-                    echo "></input>";
+                            <textarea oninput='highlight(this)' class='desc' placeholder='Description' name='desc_<?php echo $newk ?>'><?php echo isset($v["desc"]) ? filter_var( $v["desc"], FILTER_SANITIZE_SPECIAL_CHARS ): ""; ?></textarea>
 
-                    echo "<textarea oninput='highlight(this)' type='text' class='desc' placeholder='Description (enter false if none)' name='desc_" . $newk . "'>";
-                    echo isset($v["desc"]) ? filter_var( $v["desc"], FILTER_SANITIZE_SPECIAL_CHARS ) : "";
-                    echo "</textarea>";
+                            <textarea oninput='highlight(this)' class='tags' placeholder='Tags (separated by commas)' name='tags_<?php echo $newk ?>'><?php echo isset($v["tags"]) ? implode( ",", $v["tags"] ) : "" ?></textarea>
+                        </div>
 
-                    echo "<textarea oninput='highlight(this)' type='text' class='tags' placeholder='Tags' name='tags_" . $newk . "'>";
-                    echo isset($v["tags"]) ? implode( ",", $v["tags"] ) : "";
-                    echo "</textarea>";
-                    echo "</div>";
-                    
-                    echo "<div class='input-end-block'>";
-                    echo "<input type='submit' onmousedown='document.getElementById(\"update-only\").value=".$newk."' name='submit_" . $newk . "'>";
-                    echo "<input type='submit' value='Delete' name='delete_" . $newk . "'>";
-                    echo "</div>";
-
-                    echo "</div>";
-                    echo isset($v["date"]) && isset($v["desc"]) ? "</details>" : "";
-                    echo "</fieldset>";
-                }
-            ?>
+                        <div class='input-end-block'>
+                            <input type='submit' onmousedown='document.getElementById("update-only").value=<?php echo $newk ?>' name='submit_<?php echo $newk ?>'>
+                            <input type='submit' value='Delete' name='delete_<?php echo $newk ?>'>
+                        </div>
+                    </div>
+                </fieldset>
+            <?php endforeach ?>
         </form>
     </body>
 </html>

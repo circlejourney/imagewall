@@ -170,26 +170,27 @@
 
     </script>
 <form method="post" action="" id="form">
-    <?php 
 
-        foreach($tagcats as $k => $v) {
-            echo "<fieldset class='category' id='$k' ondrop='drop(event)' ondragover='dragover(event)'>";
-            
-            echo "<div class='button move-button' onclick='moveCategory(-1,event)'>▲</div>";
-            echo "<div class='button move-button' onclick='moveCategory(1,event)'>▼</div>";
-            echo "<div class='button delete' onclick='deleteCategory(event)'>✖</div>";
-            
-            echo "<h2 class='category-header' ". ($k!=="uncategorised" ? " contentEditable='true'" : "") . "oninput='updateName(event)'>$k</h2>";
-            foreach($v as $w) {
-                echo "<div class='tag' id='$w' draggable='true' ondragstart='drag(event)'>";
-                echo $w;
-                echo "<input type='hidden' class='tag-category' id='$w-category' name='$w' value='$k'>";
-                echo "</div>";
-            }
-            echo "</fieldset>";
-        }
+    <?php foreach($tagcats as $k => $v): ?>
 
-    ?>
+            <fieldset class='category' id='<?php echo $k ?>' ondrop='drop(event)' ondragover='dragover(event)'>
+                <div class='button move-button' onclick='moveCategory(-1,event)'>▲</div>
+                <div class='button move-button' onclick='moveCategory(1,event)'>▼</div>
+                <div class='button delete' onclick='deleteCategory(event)'>✖</div>
+                
+                <h2 class='category-header' <?php echo ($k!=="uncategorised" ? " contentEditable='true'" : "") ?> oninput='updateName(event)'><?php echo $k ?></h2>
+
+                <?php foreach($v as $w): ?>
+                    <div class='tag' id='$w' draggable='true' ondragstart='drag(event)'>
+                    <?php echo $w ?>
+                        <input type='hidden' class='tag-category' id='<?php echo $w ?>-category' name='<?php echo $w ?>' value='<?php echo $k ?>'>
+                    </div>
+                <?php endforeach ?>
+
+            </fieldset>
+
+    <?php endforeach ?>
+
     <fieldset id="add-cat">
         <input type="hidden" id="catorder" name="catorder" value="<?php echo implode(",", $taginfo["catorder"]) ?>">
         <button onclick="addcat(event)">Add category</button>

@@ -30,7 +30,6 @@
         foreach($copyfiles as $path) {
             $sourcepath = buildpath($dir, $path);
             $targetpath = buildpath($target, $path);
-            echo "Creating ".$targetpath."\n";
             if( is_dir( $sourcepath ) ) {
                 if( !is_dir($targetpath) ) mkdir( $targetpath );
                 recursive_copy($sourcepath, $targetpath);

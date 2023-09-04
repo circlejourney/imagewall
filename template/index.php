@@ -7,14 +7,11 @@
         <meta property="og:title" content="Image Wall" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="#INSERT_URL_HERE" />
-        <?php
-            if(isset($_GET["img"])) {
-                $thumburl = $_GET["img"];
-                echo "<meta property='og:image' content='thumbs/$thumburl' />";
-            } else {
-                echo "<meta property='og:image' content='assets/favicon.png' />";
-            }
-        ?>
+        <?php if(isset($_GET["img"])): ?>
+                <meta property='og:image' content='thumbs/<?php echo $_GET["img"]?>' />
+        <?php else: ?>
+                <meta property='og:image' content='assets/favicon.png' />
+        <?php endif ?>
 
         <link rel="stylesheet" href="assets/jquery-ui.min.css">
         <link rel="stylesheet" href="style.css?12">
@@ -304,12 +301,9 @@
 
         <div class="gallery-view pagination"></div>
             
-        <div class="gallery-view tag-info hidden">
-        </div>
+        <div class="gallery-view tag-info hidden"></div>
 
-        <div class="gallery-view gallery">
-
-        </div>
+        <div class="gallery-view gallery"></div>
 
         <div class="gallery-view pagination"></div>
     </body>
