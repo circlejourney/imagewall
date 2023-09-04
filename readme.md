@@ -1,20 +1,28 @@
 # Image Wall
 A PHP engine for creating masonry-style image galleries. Detailed tag/extag system, options for infinite scroll and pagination modes, NSFW filters, and more. This is a hobby project and will continue to be developed! A live example can be seen at <a href="https://circlejourney.net/offshore/wall">Offshore image wall</a>.
+A PHP engine for creating masonry-style image galleries. Detailed tag/extag system, options for infinite scroll and pagination modes, NSFW filters, and more. This is a hobby project and will continue to be developed! A live example can be seen at <a href="https://circlejourney.net/offshore/wall">Offshore image wall</a>.
 
 ## Prerequisites
-- Install [XAMPP from Apache Friends](https://www.apachefriends.org/) and add the **php** directory to your PATH variable.
-- Install GD Graphics Library. In your local install of PHP, open **php.ini** and add the line:
+Install [XAMPP from Apache Friends](https://www.apachefriends.org/) and add the **php** directory from the install folder to your PATH variable ([Windows tutorial](https://dinocajic.medium.com/add-xampp-php-to-environment-variables-in-windows-10-af20a765b0ce)).
+
+Install GD Graphics Library. Usually this is included with PHP installs, you just have to turn it on. Go to the **php** directory, opening the **php.ini** file with a text editor and add/uncomment the line:
   > `extension=gd`
 
 ## Quick start
-- Initialise the project by running the command `php -r "require 'tools.php'; init();"` in the root directory. This will create the **www** directory with empty data files. If you're just creating an image wall (and not contributing to the repo) you will only be editing files in this directory. The files can be edited with the built-in Image Manager and Tag Manager, or by hand.
-  - To use the managers, run the PHP server in the root directory with `php -S localhost:8000`.
-  - Navigate to `localhost:8000/manage-images.php` to start adding images, and `localhost:8000/manage-tags.php` to organise tags.
-  - I recommend uploading a couple of images via the web interfaces to see what the JSON structure looks like before adding more by hand. **imagelist.json** contains data for the main image gallery while **tags.json** contains meta info for the tags, such as category order and tag categorisation.
-- Note: Files in the root directory are for development only; do not publish **manage-images.php** and **manage-tags.php** in the production version as these may allow the public to modify files on your server.
+Initialise the project by running the **imagewall-init.bat** file. This will create the **www** directory with empty data files. Alternatively, you can simply make a copy of the **template** directory and rename it to **www**. If you're just creating an image wall (and not contributing to the repo) you will only be editing files inside **www**.
 
-## Clearing the project
-- To clear the development folder, run the command `php -r "require 'tools.php'; clear();"` and enter Y to confirm. You can also simply delete the **www** directory. You can start a new image wall project as per above.
+Once **www** is set up, there are two ways to add new images and tags: with the built-in Image Manager and Tag Manager, or by hand.
+  1. Start the PHP server in the root directory by running the **imagewall-start-server.bat** file. Then the Image Manager can be accessed at `localhost:8000/manage-images.php` where you can start adding images.
+  2. Once you've added some images with tags (comma-separated), these tags will automatically appear in the tag list.
+  3. You can now go to the Tag Manager at `localhost:8000/manage-tags.php` to organise tags into categories, as well as add new tag categories.
+  4. I recommend uploading a couple of images via these managers to see what the JSON structure looks like before adding more by hand. **imagelist.json** contains data for the main image gallery while **tags.json** contains meta info for the tags, such as category order and tag categorisation.
+
+When you've finished adding images, you can upload all the contents of the **www** directory to a folder on your web host (make sure you have a PHP 8+ install).
+
+**NOTE:** Files in the root directory are for development only; do not publish **manage-images.php** and **manage-tags.php** in the production version as these may allow the public to modify files on your server.
+
+## Restarting
+To clear the development folder, simply delete the **www** directory. You can start a new image wall project as per above.
 
 ## Reference
 
@@ -23,7 +31,6 @@ A PHP engine for creating masonry-style image galleries. Detailed tag/extag syst
 - **template/** is a template folder for the development workspace. If you are just building your own image wall and not contributing to the repo, don't edit these. If you are editing the base engine to contribute, work here as **www** is ignored when pushing changes.
 - **www/** is where the public HTML build will be created. It contains all the files required to serve the image wall on a web server. Customisations for individual image wall projects live here. On a local server, the /www path functions as a live preview.
   - **index.php** and **style.css** make up the HTML frontend.
-    - You can change project settings in the JS at the top of **index.php**. TODO: PHP interface for project settings.
   - **imagelist.json** and **tags.json** contain configuration files for the image gallery and tag list/categories respectively.
   - **assets/** contains site assets and frontend dependencies.
   - **images/** is where full-size images are stored. Files uploaded through **manage-images.php** will be added here.

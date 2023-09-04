@@ -1,0 +1,1 @@
+php -r "require 'tools.php'; init();"
