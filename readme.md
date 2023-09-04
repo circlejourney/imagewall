@@ -23,12 +23,12 @@ A PHP engine for creating masonry-style image galleries. Detailed tag/extag syst
 - **template** is a template folder for the development workspace. If you are just building your own image wall and not contributing to the repo, don't edit these. If you are editing the base engine to contribute, work here as **www** is ignored when pushing changes.
 - **www** is where the public HTML build will be created. It contains all the files required to serve the image wall on a web server. Customisations for individual image wall projects live here. On a local server, the /www path functions as a live preview.
   - **index.php** and **style.css** make up the HTML frontend.
+    - You can change project settings in the JS at the top of **index.php**. TODO: PHP interface for project settings.
   - **imagelist.json** and **tags.json** contain configuration files for the image gallery and tag list/categories respectively.
-  - You can change project settings in the JS at the top of **index.php**. TODO: PHP interface for project settings.
-  - **assets** contains site assets and frontend dependencies.
-  - **images** is where full-size images are stored.
-  - **thumbnails** is where image thumbnails are stored. These are automatically generated when you upload files through manage-images.php, but can also be manually updated.
-  - **tag-info** is where you add HTML files containing tag info. The image filter automatically searches for an HTML file with the same name as the tag and displays it in the tag info section. e.g. for a tag called `country-a`, add a file called `country-a.html` to the tag-info directory, and it will show up in the tag info section on the main image wall. TODO: Tag info interface in manage-tags.php
+  - **assets/** contains site assets and frontend dependencies.
+  - **images/** is where full-size images are stored. Files uploaded through **manage-images.php** will be added here.
+  - **thumbnails/** is where image thumbnails are stored. These are automatically generated when you upload files through **manage-images.php** and are 400px wide by default, but they can also be manually created and updated.
+  - **tag-info/** is where you add HTML files containing tag info. The image filter automatically searches for an HTML file with the same name as the tag and displays it in the tag info section. e.g. for a tag called `country-a`, add a file called `country-a.html` to the **tag-info** directory, and it will show up in the tag info section on the main image wall. TODO: Tag info interface in manage-tags.php
 - **tools.php** contains useful read/write tools for initialising and clearing the project.
 - **index.php** acts as a hub page for locating the other user-facing pages.
 
