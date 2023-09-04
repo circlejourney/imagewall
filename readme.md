@@ -20,8 +20,8 @@ A PHP engine for creating masonry-style image galleries. Detailed tag/extag syst
 
 ### File tree
 - **manage-images.php** and **manage-tags.php** are the interactive image and file managers, for those who would prefer to update through a GUI instead of editing the JSON and image files directly.
-- **template** is a template folder for the development workspace. If you are just building your own image wall and not contributing to the repo, don't edit these. If you are editing the base engine to contribute, work here as **www** is ignored when pushing changes.
-- **www** is where the public HTML build will be created. It contains all the files required to serve the image wall on a web server. Customisations for individual image wall projects live here. On a local server, the /www path functions as a live preview.
+- **template/** is a template folder for the development workspace. If you are just building your own image wall and not contributing to the repo, don't edit these. If you are editing the base engine to contribute, work here as **www** is ignored when pushing changes.
+- **www/** is where the public HTML build will be created. It contains all the files required to serve the image wall on a web server. Customisations for individual image wall projects live here. On a local server, the /www path functions as a live preview.
   - **index.php** and **style.css** make up the HTML frontend.
     - You can change project settings in the JS at the top of **index.php**. TODO: PHP interface for project settings.
   - **imagelist.json** and **tags.json** contain configuration files for the image gallery and tag list/categories respectively.
