@@ -1,6 +1,5 @@
 # Image Wall
 A PHP engine for creating masonry-style image galleries. Detailed tag/extag system, options for infinite scroll and pagination modes, NSFW filters, and more. This is a hobby project and will continue to be developed! A live example can be seen at <a href="https://circlejourney.net/offshore/wall">Offshore image wall</a>.
-A PHP engine for creating masonry-style image galleries. Detailed tag/extag system, options for infinite scroll and pagination modes, NSFW filters, and more. This is a hobby project and will continue to be developed! A live example can be seen at <a href="https://circlejourney.net/offshore/wall">Offshore image wall</a>.
 
 ## Prerequisites
 Install [XAMPP from Apache Friends](https://www.apachefriends.org/) and add the **php** directory from the install folder to your PATH variable ([Windows tutorial](https://dinocajic.medium.com/add-xampp-php-to-environment-variables-in-windows-10-af20a765b0ce)).
